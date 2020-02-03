@@ -1,12 +1,12 @@
 const express = require('express');
-//const connectDB = require('./config/db.js');
+// const connectDB = require('./config/db.js');
 
 const app = express();
 
 // Connect Databas
-//connectDB();
+// connectDB();
 
-//Init Middleware
+// Init Middleware
 app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) =>
@@ -15,7 +15,7 @@ app.get('/', (req, res) =>
   })
 );
 
-//Define Routes
+// Define Routes
 // app.use('/api/users', require('./routes/users.js'));
 // app.use('/api/contacts', require('./routes/contacts.js'));
 // app.use('/api/auth', require('./routes/auth.js'));
