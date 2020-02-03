@@ -1,7 +1,7 @@
 {
-  "name": "uqjx_react",
+  "name": "react_app_boilerplate",
   "version": "1.0.0",
-  "description": "UQJX website",
+  "description": "react_app_boilerplate",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
