@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,11 +11,7 @@ const useStyles = makeStyles(theme => ({
 const Test = () => {
   const classes = useStyles();
 
-  return (
-    <button type='button' className={classes.root}>
-      Theming
-    </button>
-  );
+  return <Button color='third'>Primary</Button>;
 };
 
 export default Test;
