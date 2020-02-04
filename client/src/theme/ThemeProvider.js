@@ -1,17 +1,25 @@
 import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
+import { CssBaseline, Container, Typography } from '@material-ui/core';
 
 const themeInstance = createMuiTheme({
   palette: {
-    primary: red,
-    third: red
-  },
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+    background: {
+      default: '#ab0f03'
+    },
+    primary: {
+      main: '#ab0f03'
+    }
+  }
 });
 
 const Theming = props => {
-  return <ThemeProvider theme={themeInstance}>{props.children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={themeInstance}>
+      <CssBaseline />
+      {props.children}
+    </ThemeProvider>
+  );
 };
 
 export default Theming;

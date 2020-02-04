@@ -1,14 +1,21 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ThemeProvider from './theme/ThemeProvider';
-import Test from './components/test.js';
+import { CircularProgress } from '@material-ui/core';
 
-function App() {
+const Home = React.lazy(() => import('./page/Home.js'));
+const App = () => {
   return (
     <ThemeProvider>
-      <Test></Test>
+      <Router>
+        <Suspense fallback={<CircularProgress />}>
+          <Switch>
+            <Route exact path='/' component={Home} />
+          </Switch>
+        </Suspense>
+      </Router>
     </ThemeProvider>
   );
-}
+};
 
 export default App;
