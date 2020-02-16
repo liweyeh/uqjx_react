@@ -6,20 +6,14 @@ import logo from '../assets/img/UQJX_Logo_White.png';
 
 // UI
 import WelcomeMenu from '../components/layout/HomeWelcomeMenu';
-import NavBar from '../components/layout/NavBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh',
-    width: '100vw'
+    height: '90vh'
   },
   content: {
     height: '90vh',
     width: '100vw'
-  },
-  navBar: {
-    height: '10vh',
-    width: 'inherited'
   },
   logo: {
     height: '40vw',
@@ -33,7 +27,6 @@ const Home = () => {
   return (
     <Fragment>
       <Box className={classes.root}>
-        <NavBar className={classes.navBar} />
         <Grid
           className={classes.content}
           container

@@ -1,6 +1,11 @@
 // Dependecies
 import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useLocation
+} from 'react-router-dom';
 import ThemeProvider from './theme/ThemeProvider';
 import { CircularProgress } from '@material-ui/core';
 
@@ -17,6 +22,7 @@ const language = navigator.language.split(/[-_]/)[0] === 'ja' ? 'ja' : 'en';
 // Pages
 const Home = React.lazy(() => import('./page/Home.js'));
 const Signup = React.lazy(() => import('./page/Signup.js'));
+const NavBar = React.lazy(() => import('./components/layout/NavBar.js'));
 
 const App = () => {
   return (
@@ -24,6 +30,7 @@ const App = () => {
       <ThemeProvider>
         <Router>
           <Suspense fallback={<CircularProgress />}>
+            <NavBar />
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/signup' component={Signup} />

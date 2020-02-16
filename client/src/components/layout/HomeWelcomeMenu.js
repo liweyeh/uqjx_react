@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Grid, Typography, ButtonGroup } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 import { PersonAdd, LocalLibrary } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   welcomeMessage: {
@@ -15,7 +16,8 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     minWidth: '13vw',
-    padding: '1rem'
+    padding: '1rem',
+    textDecoration: 'none'
   },
   buttonItem: {
     marginRight: '0.6rem'
@@ -39,7 +41,13 @@ const HomeWelcomeMenu = () => {
           color='primary'
           size='large'
         >
-          <Button className={classes.button} variant='contained'>
+          <Button
+            color='primary'
+            className={classes.button}
+            variant='contained'
+            component={Link}
+            to='/signup'
+          >
             <PersonAdd className={classes.buttonItem} />
             <Typography color='secondary'>
               <FormattedMessage id='home.join' defaultMessage='Welcome' />
