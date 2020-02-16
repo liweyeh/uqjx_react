@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -34,8 +34,7 @@ const NavBar = basePath => {
   const { goBack, location } = useHistory();
   const { pathname } = location;
 
-  // state
-  const [originalPath, setPath] = useState('/');
+  const originalPath = '/';
 
   return (
     <div className={classes.root}>
