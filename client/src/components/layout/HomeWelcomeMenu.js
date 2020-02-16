@@ -1,20 +1,11 @@
 // Dependencies
-import React, { Fragment } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Box, Grid, Typography, ButtonGroup } from '@material-ui/core';
+import { Button, Grid, Typography, ButtonGroup } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 import { PersonAdd, LocalLibrary } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    height: '100vh',
-    width: '100vw'
-  },
-  logo: {
-    height: '40vw',
-    width: '40vw',
-    borderRadius: '400px'
-  },
   welcomeMessage: {
     marginBottom: '3rem'
   },
