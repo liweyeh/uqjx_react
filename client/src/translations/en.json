@@ -2,5 +2,16 @@
   "home.welcome": "Experience Japanese culture within UQ",
   "home.join": "Join UQJX",
   "home.know": "Know More",
-  "navbar.login": " Staff Login"
+  "navbar.login": "Staff Login",
+  "signup.title": "Signup Form",
+  "signup.instruction": "Please fill out the following form",
+  "signup.reminder": "Please remember to pay $5 to UQJX staff in person after registration. Otherwise, you won't be able to receieve your membership card",
+  "signup.register": " Register",
+  "signup.international": "International",
+  "signup.domestic": "Domestic",
+  "signup.other": "Other",
+  "signup.beginner": "Beginner",
+  "signup.intermediate": "Intermediate",
+  "signup.advanced": "Advanced",
+  "signup.native": "Native"
 }

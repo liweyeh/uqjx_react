@@ -12,7 +12,8 @@ import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 
 // Icons
-import { Menu, ArrowBack } from '@material-ui/icons';
+import { ArrowBack, ExpandMore } from '@material-ui/icons';
+import japanFlag from '../../assets/img/Japan_Flag.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,7 +59,8 @@ const NavBar = basePath => {
               color='inherit'
               aria-label='menu'
             >
-              <Menu />
+              <img src={japanFlag} alt='flag' />
+              <ExpandMore />
             </IconButton>
             <Button color='inherit'>
               <Typography variant='h6' className={classes.title}>
