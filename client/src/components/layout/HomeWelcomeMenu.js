@@ -53,7 +53,12 @@ const HomeWelcomeMenu = () => {
               <FormattedMessage id='home.join' defaultMessage='Welcome' />
             </Typography>
           </Button>
-          <Button className={classes.button} variant='contained'>
+          <Button
+            className={classes.button}
+            variant='contained'
+            component={Link}
+            to='/intro'
+          >
             <LocalLibrary className={classes.buttonItem} />
             <Typography color='secondary'>
               <FormattedMessage id='home.know' defaultMessage='Welcome' />

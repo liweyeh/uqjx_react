@@ -13,5 +13,9 @@
   "signup.beginner": "Beginner",
   "signup.intermediate": "Intermediate",
   "signup.advanced": "Advanced",
-  "signup.native": "Native"
+  "signup.native": "Native",
+  "intro.what": "What is UQJX?",
+  "intro.events": "UQJX Events",
+  "intro.sponsors": "UQJX Sponsors",
+  "intro.learn": "Learn More"
 }
