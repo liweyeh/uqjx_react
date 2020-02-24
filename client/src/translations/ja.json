@@ -5,7 +5,7 @@
   "navbar.login": "Staff Login",
   "signup.title": "Signup Form",
   "signup.instruction": "Please fill out the following form",
-  "signup.reminder": "Please remember to pay $5 to UQJX staff in person after registration. Otherwise, you won't be able to receieve your membership card",
+  "signup.reminder": "Please remember to pay $5 to UQJX staff in person after registration. Otherwise, you won't be able to receive your membership card",
   "signup.register": " Register",
   "signup.international": "International",
   "signup.domestic": "Domestic",
@@ -14,7 +14,7 @@
   "signup.intermediate": "Intermediate",
   "signup.advanced": "Advanced",
   "signup.native": "Native",
-  "intro.what": "What is UQJX?",
+  "intro.what": "About UQJX",
   "intro.events": "UQJX Events",
   "intro.sponsors": "UQJX Sponsors",
   "intro.learn": "Learn More"
