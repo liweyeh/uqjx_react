@@ -19,6 +19,9 @@ const Home = React.lazy(() => import('./page/Home.js'));
 const Signup = React.lazy(() => import('./page/Signup.js'));
 const NavBar = React.lazy(() => import('./components/layout/NavBar.js'));
 const Intro = React.lazy(() => import('./page/IntroSelection.js'));
+const About = React.lazy(() => import('./page/About.js'));
+const Events = React.lazy(() => import('./page/Events.js'));
+const Sponsors = React.lazy(() => import('./page/Sponsors.js'));
 
 const App = () => {
   return (
@@ -31,6 +34,9 @@ const App = () => {
               <Route exact path='/' component={Home} />
               <Route exact path='/signup' component={Signup} />
               <Route exact path='/intro' component={Intro} />
+              <Route exact path='/intro/about' component={About} />
+              <Route exact path='/intro/event' component={Events} />
+              <Route exact path='/intro/sponsor' component={Sponsors} />
             </Switch>
           </Suspense>
         </Router>

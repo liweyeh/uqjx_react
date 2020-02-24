@@ -17,6 +17,9 @@ import viewImage from '../assets/img/Japan_View.jpg';
 import foodImage from '../assets/img/Japan_Food.jpg';
 import eventImage from '../assets/img/Japan_Event.jpg';
 
+// Links
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100vw',
@@ -56,7 +59,13 @@ const IntroSelection = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size='large' color='primary'>
+            <Button
+              size='large'
+              color='primary'
+              variant='contained'
+              component={Link}
+              to='intro/about'
+            >
               <FormattedMessage id='intro.learn' defaultMessage='Learn More' />
             </Button>
           </CardActions>
@@ -75,7 +84,13 @@ const IntroSelection = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size='large' color='primary'>
+            <Button
+              size='large'
+              color='primary'
+              variant='contained'
+              component={Link}
+              to='intro/event'
+            >
               <FormattedMessage id='intro.learn' defaultMessage='Learn More' />
             </Button>
           </CardActions>
@@ -94,7 +109,13 @@ const IntroSelection = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size='large' color='primary'>
+            <Button
+              size='large'
+              color='primary'
+              variant='contained'
+              component={Link}
+              to='intro/sponsor'
+            >
               <FormattedMessage id='intro.learn' defaultMessage='Learn More' />
             </Button>
           </CardActions>
