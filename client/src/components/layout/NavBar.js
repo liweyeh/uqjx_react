@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -17,6 +17,9 @@ import { useHistory } from 'react-router-dom';
 // Icons
 import { ArrowBack, ExpandMore } from '@material-ui/icons';
 import japanFlag from '../../assets/img/Japan_Flag.png';
+
+// Context
+import AuthContext from '../../context/auth/authContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +77,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavBar = (basePath) => {
-  // hooks
+  // Context
+  const authContext = useContext(AuthContext);
+  const { register } = authContext;
+  // Hooks
   const classes = useStyles();
   const { goBack, location } = useHistory();
   const { pathname } = location;
@@ -83,7 +89,8 @@ const NavBar = (basePath) => {
   // States
   const [open, setOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  const [user, setUser] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [societyPassword, setSocietyPassword] = useState('');
@@ -104,7 +111,7 @@ const NavBar = (basePath) => {
   };
 
   const handleSubmit = () => {
-    console.log('hi');
+    register({ name, email, password });
   };
 
   // Forms
@@ -118,10 +125,10 @@ const NavBar = (basePath) => {
         variant='outlined'
         color='secondary'
         className={classes.textInput}
-        value={user}
+        value={name}
         autoComplete='no'
         autoFocus
-        onChange={(e) => setUser(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
       />
       <TextField
         label='Password'
@@ -155,10 +162,19 @@ const NavBar = (basePath) => {
         variant='outlined'
         color='secondary'
         className={classes.textInput}
-        value={user}
+        value={name}
         autoComplete='no'
         autoFocus
-        onChange={(e) => setUser(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <TextField
+        label='Email'
+        variant='outlined'
+        color='secondary'
+        className={classes.textInput}
+        value={email}
+        autoComplete='no'
+        onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
         label='Password'

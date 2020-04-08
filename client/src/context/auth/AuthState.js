@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import {
-  REGISTER_SCCUESS,
+  REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
   AUTH_ERROR,
@@ -28,7 +28,37 @@ const AuthState = (props) => {
   // Load User
 
   // Register User
+  const register = (formData) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
+    try {
+      fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      // .then((res) => {
+      //   dispatch({
+      //     type: REGISTER_SUCCESS,
+      //     payload: res.data,
+      //   });
+      // })
+      // .catch((err) => {
+      //   console.error(err);
+      // });
+    } catch (error) {
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: error.response.data.msg,
+      });
+    }
+  };
   // Login User
 
   // Logout
@@ -42,6 +72,7 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         error: state.error,
+        register,
       }}
     >
       {props.children}
