@@ -5,6 +5,7 @@ import ThemeProvider from './theme/ThemeProvider';
 import { CircularProgress } from '@material-ui/core';
 // Context
 import AuthState from './context/auth/AuthState';
+import AlertState from './context/alert/AlertState';
 // Language Import
 import { IntlProvider } from 'react-intl';
 import messages_ja from './translations/ja.json';
@@ -23,25 +24,28 @@ const Intro = React.lazy(() => import('./page/IntroSelection.js'));
 const About = React.lazy(() => import('./page/About.js'));
 const Events = React.lazy(() => import('./page/Events.js'));
 const Sponsors = React.lazy(() => import('./page/Sponsors.js'));
+const Alerts = React.lazy(() => import('./components/layout/Alert.js'));
 
 const App = () => {
   return (
     <IntlProvider locale={language} messages={messages[language]}>
       <ThemeProvider>
         <AuthState>
-          <Router>
-            <Suspense fallback={<CircularProgress />}>
-              <NavBar />
-              <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/signup' component={Signup} />
-                <Route exact path='/intro' component={Intro} />
-                <Route exact path='/intro/about' component={About} />
-                <Route exact path='/intro/event' component={Events} />
-                <Route exact path='/intro/sponsor' component={Sponsors} />
-              </Switch>
-            </Suspense>
-          </Router>
+          <AlertState>
+            <Router>
+              <Suspense fallback={<CircularProgress />}>
+                <NavBar />
+                <Switch>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/signup' component={Signup} />
+                  <Route exact path='/intro' component={Intro} />
+                  <Route exact path='/intro/about' component={About} />
+                  <Route exact path='/intro/event' component={Events} />
+                  <Route exact path='/intro/sponsor' component={Sponsors} />
+                </Switch>
+              </Suspense>
+            </Router>
+          </AlertState>
         </AuthState>
       </ThemeProvider>
     </IntlProvider>

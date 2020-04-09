@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core/';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
+import Alert from './Alert';
 
 // Icons
 import { ArrowBack, ExpandMore } from '@material-ui/icons';
@@ -20,6 +21,7 @@ import japanFlag from '../../assets/img/Japan_Flag.png';
 
 // Context
 import AuthContext from '../../context/auth/authContext';
+import AlertContext from '../../context/alert/alertContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,6 +82,9 @@ const NavBar = (basePath) => {
   // Context
   const authContext = useContext(AuthContext);
   const { register } = authContext;
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
   // Hooks
   const classes = useStyles();
   const { goBack, location } = useHistory();
@@ -95,13 +100,12 @@ const NavBar = (basePath) => {
   const [password2, setPassword2] = useState('');
   const [societyPassword, setSocietyPassword] = useState('');
 
+  // Constant
+  const societyPasswordTrue = 'umeshu';
+
   // Methods
   const handleClick = (origin) => {
-    if (origin === 'register') {
-      setModalContent(origin);
-    } else {
-      setModalContent(origin);
-    }
+    setModalContent(origin);
     setOpen(true);
   };
 
@@ -110,8 +114,17 @@ const NavBar = (basePath) => {
     setModalContent(null);
   };
 
-  const handleSubmit = () => {
-    register({ name, email, password });
+  const handleSubmit = (e, type) => {
+    e.preventDefault();
+    if (type === 'register') {
+      if (password === password2 && societyPassword === societyPasswordTrue) {
+        register({ name, email, password });
+      } else {
+        setAlert('Please enter all fields', 'danger');
+      }
+    } else {
+      console.log('hi login?');
+    }
   };
 
   // Forms
@@ -120,6 +133,7 @@ const NavBar = (basePath) => {
       <Typography color='secondary' variant='h4' className={classes.formItem}>
         <FormattedMessage id='navbar.login' defaultMessage='Staff Login' />
       </Typography>
+      <Alert />
       <TextField
         label='User'
         variant='outlined'
@@ -143,7 +157,7 @@ const NavBar = (basePath) => {
         className={classes.submit}
         color='secondary'
         variant='outlined'
-        onClick={handleSubmit}
+        onClick={(e) => handleSubmit(e, 'login')}
       >
         <Typography color='secondary'>
           <FormattedMessage id='navbar.login' defaultMessage='Login' />
@@ -157,6 +171,7 @@ const NavBar = (basePath) => {
       <Typography color='secondary' variant='h4' className={classes.formItem}>
         <FormattedMessage id='navbar.register' defaultMessage='Signup' />
       </Typography>
+      <Alert />
       <TextField
         label='User'
         variant='outlined'
@@ -207,7 +222,7 @@ const NavBar = (basePath) => {
         className={classes.submit}
         color='secondary'
         variant='outlined'
-        onClick={handleSubmit}
+        onClick={(e) => handleSubmit(e, 'register')}
       >
         <Typography color='secondary'>
           <FormattedMessage id='navbar.register' defaultMessage='register' />
