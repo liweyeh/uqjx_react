@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (basePath) => {
   // Context
   const authContext = useContext(AuthContext);
-  const { register } = authContext;
+  const { register, error, clearError } = authContext;
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
@@ -103,6 +103,15 @@ const NavBar = (basePath) => {
   // Constant
   const societyPasswordTrue = 'umeshu';
 
+  // Life Cycle
+  useEffect(() => {
+    if (error) {
+      setAlert(error, 'danger');
+      setTimeout(() => {
+        clearError();
+      }, 5000);
+    }
+  }, [error]);
   // Methods
   const handleClick = (origin) => {
     setModalContent(origin);
@@ -117,10 +126,14 @@ const NavBar = (basePath) => {
   const handleSubmit = (e, type) => {
     e.preventDefault();
     if (type === 'register') {
-      if (password === password2 && societyPassword === societyPasswordTrue) {
-        register({ name, email, password });
-      } else {
+      if (name === '' || email === '' || password === '') {
         setAlert('Please enter all fields', 'danger');
+      } else if (password !== password2) {
+        setAlert('Password is different from the comfirm one', 'danger');
+      } else if (societyPassword !== societyPasswordTrue) {
+        setAlert('Incorrect society password', 'danger');
+      } else {
+        register({ name, email, password });
       }
     } else {
       console.log('hi login?');

@@ -26,7 +26,7 @@ const AuthState = (props) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Load User
-
+  const loadUser = () => console.log('load');
   // Register User
   const register = (formData) => {
     const config = {
@@ -35,35 +35,45 @@ const AuthState = (props) => {
       },
     };
 
-    try {
-      fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+    fetch('/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data, type) => {
+        if (data.token !== undefined) {
+          dispatch({
+            type: REGISTER_SUCCESS,
+            payload: data,
+          });
+        } else {
+          throw new Error(data.msg);
+        }
+      })
+      .catch((error) => {
+        dispatch({
+          type: REGISTER_FAIL,
+          payload: error.message,
+        });
       });
-      // .then((res) => {
-      //   dispatch({
-      //     type: REGISTER_SUCCESS,
-      //     payload: res.data,
-      //   });
-      // })
-      // .catch((err) => {
-      //   console.error(err);
-      // });
-    } catch (error) {
-      dispatch({
-        type: REGISTER_FAIL,
-        payload: error.response.data.msg,
-      });
-    }
   };
   // Login User
+  const login = () => console.log('login');
 
   // Logout
+  const logout = () => console.log('logout');
 
   // Clear Errors
+  const clearError = () =>
+    dispatch({
+      type: CLEAR_ERRORS,
+    });
+
   return (
     <AuthContext.Provider
       value={{
@@ -73,6 +83,10 @@ const AuthState = (props) => {
         user: state.user,
         error: state.error,
         register,
+        loadUser,
+        login,
+        logout,
+        clearError,
       }}
     >
       {props.children}
