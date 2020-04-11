@@ -10,8 +10,6 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
-  SET_ALERT,
-  REMOVE_ALERT,
 } from '../type';
 
 const AuthState = (props) => {
@@ -26,15 +24,32 @@ const AuthState = (props) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Load User
-  const loadUser = () => console.log('load');
-  // Register User
-  const register = (formData) => {
-    const config = {
+  const loadUser = () => {
+    fetch('/api/auth', {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'x-auth-token': state.token,
       },
-    };
-
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        dispatch({
+          type: USER_LOADED,
+          payload: data,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: AUTH_ERROR,
+          payload: error.message,
+        });
+      });
+  };
+  // Register User
+  const register = (formData) => {
     fetch('/api/users', {
       method: 'POST',
       headers: {
@@ -45,12 +60,13 @@ const AuthState = (props) => {
       .then((res) => {
         return res.json();
       })
-      .then((data, type) => {
+      .then((data) => {
         if (data.token !== undefined) {
           dispatch({
             type: REGISTER_SUCCESS,
             payload: data,
           });
+          loadUser();
         } else {
           throw new Error(data.msg);
         }

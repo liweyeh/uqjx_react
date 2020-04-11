@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (basePath) => {
   // Context
   const authContext = useContext(AuthContext);
-  const { register, error, clearError } = authContext;
+  const { register, error, clearError, loadUser, token } = authContext;
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
@@ -112,6 +112,12 @@ const NavBar = (basePath) => {
       }, 5000);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (token) {
+      loadUser();
+    }
+  }, [token]);
   // Methods
   const handleClick = (origin) => {
     setModalContent(origin);
