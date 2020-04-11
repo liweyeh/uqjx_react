@@ -49,7 +49,7 @@ const AuthState = (props) => {
       });
   };
   // Register User
-  const register = (formData) => {
+  const register = (formData, setOpen) => {
     fetch('/api/users', {
       method: 'POST',
       headers: {
@@ -67,6 +67,7 @@ const AuthState = (props) => {
             payload: data,
           });
           loadUser();
+          setOpen(false);
         } else {
           throw new Error(data.msg);
         }
@@ -79,10 +80,42 @@ const AuthState = (props) => {
       });
   };
   // Login User
-  const login = () => console.log('login');
+  const login = (formData, setOpen) =>
+    fetch('/api/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.token !== undefined) {
+          dispatch({
+            type: LOGIN_SUCCESS,
+            payload: data,
+          });
+          loadUser();
+          setOpen(false);
+        } else {
+          throw new Error(data.msg);
+        }
+      })
+      .catch((error) => {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: error.message,
+        });
+      });
 
   // Logout
-  const logout = () => console.log('logout');
+  const logout = () => {
+    dispatch({
+      type: LOGOUT,
+    });
+  };
 
   // Clear Errors
   const clearError = () =>

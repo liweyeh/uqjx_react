@@ -81,7 +81,16 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (basePath) => {
   // Context
   const authContext = useContext(AuthContext);
-  const { register, error, clearError, loadUser, token } = authContext;
+  const {
+    register,
+    error,
+    clearError,
+    loadUser,
+    token,
+    login,
+    user,
+    logout,
+  } = authContext;
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
@@ -124,8 +133,17 @@ const NavBar = (basePath) => {
     setOpen(true);
   };
 
+  const handleUserClick = () => {
+    console.log('hi');
+  };
+
   const handleClose = () => {
     setOpen(false);
+    setName(null);
+    setEmail(null);
+    setPassword(null);
+    setPassword2(null);
+    setSocietyPassword(null);
     setModalContent(null);
   };
 
@@ -139,10 +157,12 @@ const NavBar = (basePath) => {
       } else if (societyPassword !== societyPasswordTrue) {
         setAlert('Incorrect society password', 'danger');
       } else {
-        register({ name, email, password });
+        register({ name, email, password }, setOpen);
       }
+    } else if (type === 'login') {
+      login({ email, password }, setOpen);
     } else {
-      console.log('hi login?');
+      console.log('hi');
     }
   };
 
@@ -154,14 +174,14 @@ const NavBar = (basePath) => {
       </Typography>
       <Alert />
       <TextField
-        label='User'
+        label='User Email'
         variant='outlined'
         color='secondary'
         className={classes.textInput}
-        value={name}
+        value={email}
         autoComplete='no'
         autoFocus
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
         label='Password'
@@ -275,19 +295,46 @@ const NavBar = (basePath) => {
               <img src={japanFlag} alt='flag' />
               <ExpandMore />
             </IconButton>
-            <Button color='inherit' onClick={() => handleClick('login')}>
-              <Typography variant='h6' className={classes.title}>
-                <FormattedMessage id='navbar.login' defaultMessage='Login' />
-              </Typography>
-            </Button>
-            <Button color='inherit' onClick={() => handleClick('register')}>
-              <Typography variant='h6' className={classes.title}>
-                <FormattedMessage
-                  id='navbar.register'
-                  defaultMessage='Register'
-                />
-              </Typography>
-            </Button>
+            {!user && (
+              <>
+                <Button color='inherit' onClick={() => handleClick('login')}>
+                  <Typography variant='h6' className={classes.title}>
+                    <FormattedMessage
+                      id='navbar.login'
+                      defaultMessage='Login'
+                    />
+                  </Typography>
+                </Button>
+                <Button
+                  color='inherit'
+                  onClick={(e) => handleClick('register')}
+                >
+                  <Typography variant='h6' className={classes.title}>
+                    <FormattedMessage
+                      id='navbar.register'
+                      defaultMessage='Register'
+                    />
+                  </Typography>
+                </Button>
+              </>
+            )}
+            {user && (
+              <>
+                <Button color='inherit' onClick={() => handleUserClick()}>
+                  <Typography variant='h6' className={classes.title}>
+                    {user.name}
+                  </Typography>
+                </Button>
+                <Button color='inherit' onClick={logout}>
+                  <Typography variant='h6' className={classes.title}>
+                    <FormattedMessage
+                      id='navbar.logout'
+                      defaultMessage='Logout'
+                    />
+                  </Typography>
+                </Button>
+              </>
+            )}
           </div>
         </Toolbar>
       </AppBar>
