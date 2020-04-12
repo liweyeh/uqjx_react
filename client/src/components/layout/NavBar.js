@@ -139,12 +139,12 @@ const NavBar = (basePath) => {
 
   const handleClose = () => {
     setOpen(false);
-    setName(null);
-    setEmail(null);
-    setPassword(null);
-    setPassword2(null);
-    setSocietyPassword(null);
-    setModalContent(null);
+    setName('');
+    setEmail('');
+    setPassword('');
+    setPassword2('');
+    setSocietyPassword('');
+    setModalContent('');
   };
 
   const handleSubmit = (e, type) => {
