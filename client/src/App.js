@@ -24,7 +24,6 @@ const Intro = React.lazy(() => import('./page/IntroSelection.js'));
 const About = React.lazy(() => import('./page/About.js'));
 const Events = React.lazy(() => import('./page/Events.js'));
 const Sponsors = React.lazy(() => import('./page/Sponsors.js'));
-const Alerts = React.lazy(() => import('./components/layout/Alert.js'));
 
 const App = () => {
   return (

@@ -10,6 +10,8 @@ import {
   Modal,
   Paper,
   TextField,
+  Menu,
+  MenuItem,
 } from '@material-ui/core/';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
@@ -108,6 +110,7 @@ const NavBar = (basePath) => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [societyPassword, setSocietyPassword] = useState('');
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   // Constant
   const societyPasswordTrue = 'umeshu';
@@ -126,15 +129,19 @@ const NavBar = (basePath) => {
     if (token) {
       loadUser();
     }
-  }, [token, loadUser]);
+  }, [token]);
   // Methods
   const handleClick = (origin) => {
     setModalContent(origin);
     setOpen(true);
   };
 
-  const handleUserClick = () => {
-    console.log('hi');
+  const handleUserClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleUserClose = () => {
+    setAnchorEl(null);
   };
 
   const handleClose = () => {
@@ -145,6 +152,11 @@ const NavBar = (basePath) => {
     setPassword2('');
     setSocietyPassword('');
     setModalContent('');
+  };
+
+  const handleLogout = () => {
+    logout();
+    handleUserClose();
   };
 
   const handleSubmit = (e, type) => {
@@ -320,19 +332,26 @@ const NavBar = (basePath) => {
             )}
             {user && (
               <>
-                <Button color='inherit' onClick={() => handleUserClick()}>
+                <Button
+                  color='inherit'
+                  onClick={(e) => handleUserClick(e)}
+                  endIcon={<ExpandMore />}
+                >
                   <Typography variant='h6' className={classes.title}>
                     {user.name}
                   </Typography>
                 </Button>
-                <Button color='inherit' onClick={logout}>
-                  <Typography variant='h6' className={classes.title}>
-                    <FormattedMessage
-                      id='navbar.logout'
-                      defaultMessage='Logout'
-                    />
-                  </Typography>
-                </Button>
+                <Menu
+                  id='simple-menu'
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleUserClose}
+                >
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
               </>
             )}
           </div>
