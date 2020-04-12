@@ -359,7 +359,7 @@ const NavBar = (basePath) => {
                   <MenuItem onClick={handleClose}>
                     <Typography variant='body1'>
                       <FormattedMessage
-                        id='navbar.membet'
+                        id='navbar.member'
                         defaultMessage='Manage Membership'
                       />
                     </Typography>
