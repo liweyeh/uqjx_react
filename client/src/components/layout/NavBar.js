@@ -126,7 +126,7 @@ const NavBar = (basePath) => {
     if (token) {
       loadUser();
     }
-  }, [token]);
+  }, [token, loadUser]);
   // Methods
   const handleClick = (origin) => {
     setModalContent(origin);
@@ -157,10 +157,10 @@ const NavBar = (basePath) => {
       } else if (societyPassword !== societyPasswordTrue) {
         setAlert('Incorrect society password', 'danger');
       } else {
-        register({ name, email, password }, setOpen);
+        register({ name, email, password }, handleClose);
       }
     } else if (type === 'login') {
-      login({ email, password }, setOpen);
+      login({ email, password }, handleClose);
     } else {
       console.log('hi');
     }

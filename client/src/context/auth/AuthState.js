@@ -25,31 +25,33 @@ const AuthState = (props) => {
 
   // Load User
   const loadUser = () => {
-    fetch('/api/auth', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': state.token,
-      },
-    })
-      .then((res) => {
-        return res.json();
+    if (state.token) {
+      fetch('/api/auth', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': state.token,
+        },
       })
-      .then((data) => {
-        dispatch({
-          type: USER_LOADED,
-          payload: data,
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          dispatch({
+            type: USER_LOADED,
+            payload: data,
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: AUTH_ERROR,
+            payload: error.message,
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: AUTH_ERROR,
-          payload: error.message,
-        });
-      });
+    }
   };
   // Register User
-  const register = (formData, setOpen) => {
+  const register = (formData, close) => {
     fetch('/api/users', {
       method: 'POST',
       headers: {
@@ -67,7 +69,7 @@ const AuthState = (props) => {
             payload: data,
           });
           loadUser();
-          setOpen(false);
+          close();
         } else {
           throw new Error(data.msg);
         }
@@ -80,7 +82,7 @@ const AuthState = (props) => {
       });
   };
   // Login User
-  const login = (formData, setOpen) =>
+  const login = (formData, close) =>
     fetch('/api/auth', {
       method: 'POST',
       headers: {
@@ -98,9 +100,18 @@ const AuthState = (props) => {
             payload: data,
           });
           loadUser();
-          setOpen(false);
+          close();
         } else {
-          throw new Error(data.msg);
+          if (data.errors) {
+            data.errors.map((error) => {
+              dispatch({
+                type: LOGIN_FAIL,
+                payload: error.msg,
+              });
+            });
+          } else {
+            throw new Error(data.msg);
+          }
         }
       })
       .catch((error) => {
