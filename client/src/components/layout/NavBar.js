@@ -348,9 +348,30 @@ const NavBar = (basePath) => {
                   open={Boolean(anchorEl)}
                   onClose={handleUserClose}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Typography variant='body1'>
+                      <FormattedMessage
+                        id='navbar.account'
+                        defaultMessage='My Account'
+                      />
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Typography variant='body1'>
+                      <FormattedMessage
+                        id='navbar.membet'
+                        defaultMessage='Manage Membership'
+                      />
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <Typography variant='body1'>
+                      <FormattedMessage
+                        id='navbar.logout'
+                        defaultMessage='Logout'
+                      />
+                    </Typography>
+                  </MenuItem>
                 </Menu>
               </>
             )}

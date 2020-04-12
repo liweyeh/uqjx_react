@@ -4,6 +4,8 @@
   "home.know": "Know More",
   "navbar.login": "Staff Login",
   "navbar.register": "Staff Register",
+  "navbar.account": "My Account",
+  "navbar.member": "Manage Membership",
   "navbar.logout": "Logout",
   "signup.title": "Signup Form",
   "signup.instruction": "Please fill out the following form",
