@@ -24,4 +24,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT} `));
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT} `);
+  console.log(`Env is ${process.env.NODE_ENV} `);
+  console.log(`DB is  ${process.env.MONGODB_URI} `);
+});
