@@ -5,18 +5,21 @@ import { CssBaseline } from '@material-ui/core';
 const themeInstance = createMuiTheme({
   palette: {
     background: {
-      default: '#ab0f03'
+      default: '#ab0f03',
     },
     primary: {
-      main: '#ab0f03'
+      main: '#ab0f03',
     },
     secondary: {
-      main: '#fff'
-    }
-  }
+      main: '#fff',
+    },
+    error: {
+      main: '#ff7b00',
+    },
+  },
 });
 
-const Theming = props => {
+const Theming = (props) => {
   return (
     <ThemeProvider theme={themeInstance}>
       <CssBaseline />

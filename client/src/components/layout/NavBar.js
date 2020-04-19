@@ -97,7 +97,7 @@ const NavBar = (basePath) => {
     logout,
   } = authContext;
   const alertContext = useContext(AlertContext);
-  const { setAlert } = alertContext;
+  const { setAlert, clearAlert } = alertContext;
 
   // Hooks
   const classes = useStyles();
@@ -155,6 +155,8 @@ const NavBar = (basePath) => {
     setPassword2('');
     setSocietyPassword('');
     setModalContent('');
+    clearError();
+    clearAlert();
   };
 
   const handleLogout = () => {
