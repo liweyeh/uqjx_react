@@ -7,19 +7,35 @@ import logo from '../assets/img/UQJX_Logo_White.png';
 // UI
 import WelcomeMenu from '../components/layout/HomeWelcomeMenu';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: '90vh'
-  },
-  content: {
+const useStyles = makeStyles((theme) => ({
+  'root': {
     height: '90vh',
-    width: '100vw'
   },
-  logo: {
+  'content': {
+    height: '90vh',
+    width: '100vw',
+  },
+  'welcomeMenu': {
+    position: 'relative',
+    animationName: '$fadeInLeft',
+    animationDuration: '2s',
+  },
+  'logo': {
     height: '40vw',
     width: '40vw',
-    borderRadius: '400px'
-  }
+    position: 'relative',
+    borderRadius: '400px',
+    animationName: '$fadeInRight',
+    animationDuration: '2s',
+  },
+  '@keyframes fadeInLeft': {
+    from: { opacity: 0, right: '30vw' },
+    to: { opacity: 1, right: '0vw' },
+  },
+  '@keyframes fadeInRight': {
+    from: { opacity: 0, left: '30vw' },
+    to: { opacity: 1, left: '0vw' },
+  },
 }));
 
 const Home = () => {
@@ -34,7 +50,7 @@ const Home = () => {
           justify='space-around'
           alignItems='center'
         >
-          <Grid item>
+          <Grid item className={classes.welcomeMenu}>
             <WelcomeMenu />
           </Grid>
           <Grid item>
