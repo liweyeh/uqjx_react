@@ -68,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
         borderColor: theme.palette.secondary.main,
       },
     },
+    '& .MuiInputBase-input': {
+      color: theme.palette.secondary.main,
+    },
     '& .MuiInputLabel-root': {
       color: theme.palette.secondary.main,
     },
@@ -199,6 +202,7 @@ const NavBar = (basePath) => {
         label='Password'
         variant='outlined'
         color='secondary'
+        type='password'
         className={classes.textInput}
         value={password}
         autoComplete='no'
@@ -248,6 +252,7 @@ const NavBar = (basePath) => {
         color='secondary'
         className={classes.textInput}
         value={password}
+        type='password'
         autoComplete='no'
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -257,6 +262,7 @@ const NavBar = (basePath) => {
         color='secondary'
         className={classes.textInput}
         value={password2}
+        type='password'
         autoComplete='no'
         onChange={(e) => setPassword2(e.target.value)}
       />
@@ -266,6 +272,7 @@ const NavBar = (basePath) => {
         color='secondary'
         className={classes.textInput}
         value={societyPassword}
+        type='password'
         autoComplete='no'
         onChange={(e) => setSocietyPassword(e.target.value)}
       />

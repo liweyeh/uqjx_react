@@ -4,17 +4,17 @@ import {
   Typography,
   Button,
   MenuItem,
-  TextField
+  TextField,
 } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '40vh',
     width: '100%',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   form: {
     width: '40vw',
@@ -23,31 +23,34 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    marginBottom: '5rem'
+    marginBottom: '5rem',
   },
   formItem: {
     margin: theme.spacing(2),
-    width: '80%'
+    width: '80%',
   },
   textInput: {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: theme.palette.secondary.main
+        borderColor: theme.palette.secondary.main,
       },
       '&:hover fieldset': {
-        borderColor: theme.palette.secondary.main
-      }
+        borderColor: theme.palette.secondary.main,
+      },
+    },
+    '& .MuiInputBase-input': {
+      color: theme.palette.secondary.main,
     },
     '& .MuiInputLabel-root': {
-      color: theme.palette.secondary.main
+      color: theme.palette.secondary.main,
     },
     'margin': theme.spacing(2),
-    'width': '80%'
+    'width': '80%',
   },
   submit: {
     marginBottom: theme.spacing(2),
-    width: '40%'
-  }
+    width: '40%',
+  },
 }));
 
 const Signup = () => {
@@ -69,7 +72,7 @@ const Signup = () => {
       phone,
       nationality,
       studentType,
-      japanese
+      japanese,
     };
     console.log(user);
   };
@@ -99,7 +102,7 @@ const Signup = () => {
             value={firstName}
             autoComplete='no'
             autoFocus
-            onChange={e => setFirstName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
             required
           />
 
@@ -110,7 +113,7 @@ const Signup = () => {
             autoComplete='no'
             className={classes.textInput}
             value={lastName}
-            onChange={e => setLastName(e.target.value)}
+            onChange={(e) => setLastName(e.target.value)}
             required
           />
 
@@ -119,7 +122,7 @@ const Signup = () => {
             variant='outlined'
             color='secondary'
             value={phone}
-            onChange={e => setPhone(e.target.value)}
+            onChange={(e) => setPhone(e.target.value)}
             className={classes.textInput}
             autoComplete='no'
             required
@@ -131,7 +134,7 @@ const Signup = () => {
             className={classes.textInput}
             value={email}
             autoComplete='no'
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <TextField
@@ -139,7 +142,7 @@ const Signup = () => {
             variant='outlined'
             color='secondary'
             value={nationality}
-            onChange={e => setNationality(e.target.value)}
+            onChange={(e) => setNationality(e.target.value)}
             className={classes.textInput}
             autoComplete='no'
           />
@@ -149,7 +152,7 @@ const Signup = () => {
             color='secondary'
             className={classes.textInput}
             value={studentType}
-            onChange={e => setStudentType(e.target.value)}
+            onChange={(e) => setStudentType(e.target.value)}
             select
             autoComplete='no'
           >
@@ -170,7 +173,7 @@ const Signup = () => {
             color='secondary'
             className={classes.textInput}
             value={japanese}
-            onChange={e => setJapanese(e.target.value)}
+            onChange={(e) => setJapanese(e.target.value)}
             select
             autoComplete='no'
           >
