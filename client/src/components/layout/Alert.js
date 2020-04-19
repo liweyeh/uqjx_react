@@ -7,11 +7,22 @@ const Alert = () => {
 
   return (
     alertContext.alerts.length > 0 &&
-    alertContext.alerts.map((alert) => (
-      <Typography key={alert.id} color='error'>
-        {alert.msg}
-      </Typography>
-    ))
+    alertContext.alerts.map((alert) => {
+      if (Array.isArray(alert.error)) {
+        const msg = alert.error.map((msg) => (
+          <Typography key={alert.id} color='error'>
+            {msg}
+          </Typography>
+        ));
+        return msg;
+      } else {
+        return (
+          <Typography key={alert.id} color='error'>
+            {alert.error}
+          </Typography>
+        );
+      }
+    })
   );
 };
 

@@ -52,6 +52,8 @@ const AuthState = (props) => {
   };
   // Register User
   const register = (formData, close) => {
+    let status = null;
+    let errorArr = [];
     fetch('/api/users', {
       method: 'POST',
       headers: {
@@ -60,10 +62,11 @@ const AuthState = (props) => {
       body: JSON.stringify(formData),
     })
       .then((res) => {
+        status = res.status;
         return res.json();
       })
       .then((data) => {
-        if (data.token !== undefined) {
+        if (status >= 200 && status <= 300) {
           dispatch({
             type: REGISTER_SUCCESS,
             payload: data,
@@ -71,13 +74,21 @@ const AuthState = (props) => {
           loadUser();
           close();
         } else {
-          throw new Error(data.msg);
+          if (Array.isArray(data.errors)) {
+            for (let error of data.errors) {
+              errorArr.push(error.msg);
+            }
+            throw new Error();
+          } else {
+            errorArr.push(data.msg);
+            throw new Error();
+          }
         }
       })
       .catch((error) => {
         dispatch({
           type: REGISTER_FAIL,
-          payload: error.message,
+          payload: errorArr.length > 0 ? errorArr : error,
         });
       });
   };

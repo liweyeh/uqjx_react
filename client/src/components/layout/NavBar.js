@@ -124,6 +124,7 @@ const NavBar = (basePath) => {
       setAlert(error, 'danger');
       setTimeout(() => {
         clearError();
+        clearAlert();
       }, 5000);
     }
   }, [error]);
@@ -165,6 +166,8 @@ const NavBar = (basePath) => {
   };
 
   const handleSubmit = (e, type) => {
+    clearError();
+    clearAlert();
     e.preventDefault();
     if (type === 'register') {
       if (name === '' || email === '' || password === '') {
