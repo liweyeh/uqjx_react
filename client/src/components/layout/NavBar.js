@@ -20,6 +20,7 @@ import Alert from './Alert';
 // Icons
 import { ArrowBack, ExpandMore } from '@material-ui/icons';
 import japanFlag from '../../assets/img/Japan_Flag.png';
+import ausFlag from '../../assets/img/Australia_Flag.png';
 
 // Context
 import AuthContext from '../../context/auth/authContext';
@@ -83,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = (basePath) => {
+const NavBar = ({ language, setLanguage }) => {
   // Context
   const authContext = useContext(AuthContext);
   const {
@@ -113,7 +114,8 @@ const NavBar = (basePath) => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [societyPassword, setSocietyPassword] = useState('');
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorLanEl, setAnchorLanEl] = useState(null);
 
   // Constant
   const societyPasswordTrue = 'umeshu';
@@ -146,6 +148,10 @@ const NavBar = (basePath) => {
 
   const handleUserClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLanClose = () => {
+    setAnchorLanEl(null);
   };
 
   const handleClose = () => {
@@ -184,6 +190,15 @@ const NavBar = (basePath) => {
     } else {
       console.log('hi');
     }
+  };
+
+  const handleLanguageClick = (e) => {
+    setAnchorLanEl(e.currentTarget);
+  };
+
+  const handleLanguageChange = (language) => {
+    setAnchorLanEl(null);
+    setLanguage(language);
   };
 
   // Forms
@@ -315,10 +330,35 @@ const NavBar = (basePath) => {
               className={classes.button}
               color='inherit'
               aria-label='menu'
+              onClick={(e) => handleLanguageClick(e)}
             >
-              <img src={japanFlag} alt='flag' />
+              <img src={language === 'ja' ? japanFlag : ausFlag} alt='flag' />
               <ExpandMore />
             </IconButton>
+            <Menu
+              id='language-menu'
+              anchorEl={anchorLanEl}
+              keepMounted
+              open={Boolean(anchorLanEl)}
+              onClose={handleLanClose}
+            >
+              <MenuItem onClick={() => handleLanguageChange('ja')}>
+                <Typography variant='body1'>
+                  <FormattedMessage
+                    id='navbar.japanese'
+                    defaultMessage='日本語'
+                  />
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={() => handleLanguageChange('en')}>
+                <Typography variant='body1'>
+                  <FormattedMessage
+                    id='navbar.english'
+                    defaultMessage='English'
+                  />
+                </Typography>
+              </MenuItem>
+            </Menu>
             {!user && (
               <>
                 <Button color='inherit' onClick={() => handleClick('login')}>
