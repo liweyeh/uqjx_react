@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Member = require('../models/Member');
 
 // @route Get api/members
 // @desc  Get all members
@@ -10,7 +11,7 @@ router.get('/', (req, res) => {
 
 // @route POST api/members
 // @desc  Add new members
-// @access Private
+// @access Public
 router.post('/', (req, res) => {
   res.send('Add member');
 });
