@@ -13,13 +13,13 @@ import AlertContext from '../context/alert/alertContext';
 import Alert from '../components/layout/Alert';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  'root': {
     height: '40vh',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
   },
-  form: {
+  'form': {
     width: '40vw',
     backgroundColor: theme.palette.primary.main,
     display: 'flex',
@@ -27,12 +27,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flexDirection: 'column',
     marginBottom: '5rem',
+    position: 'relative',
+    animationName: '$fadeInLeft',
+    animationDuration: '2s',
   },
-  formItem: {
+  'formItem': {
     margin: theme.spacing(2),
     width: '80%',
   },
-  modal: {
+  'modal': {
     width: '20vw',
     minWidth: '400px',
     padding: theme.spacing(2),
@@ -43,20 +46,20 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     marginBottom: '5rem',
   },
-  modalRoot: {
+  'modalRoot': {
     height: '100%',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalItem: {
+  'modalItem': {
     textAlign: 'center',
   },
-  modalBottom: {
+  'modalBottom': {
     marginTop: theme.spacing(),
   },
-  textInput: {
+  'textInput': {
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
         borderColor: theme.palette.secondary.main,
@@ -74,9 +77,13 @@ const useStyles = makeStyles((theme) => ({
     'margin': theme.spacing(2),
     'width': '80%',
   },
-  submit: {
+  'submit': {
     marginBottom: theme.spacing(2),
     width: '40%',
+  },
+  '@keyframes fadeInLeft': {
+    from: { opacity: 0, right: '30vw' },
+    to: { opacity: 1, right: '0vw' },
   },
 }));
 
