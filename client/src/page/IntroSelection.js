@@ -8,7 +8,7 @@ import {
   CardMedia,
   Button,
   Typography,
-  Grid
+  Grid,
 } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 
@@ -20,21 +20,39 @@ import eventImage from '../assets/img/Japan_Event.jpg';
 // Links
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles(theme => ({
-  root: {
+const useStyles = makeStyles((theme) => ({
+  'root': {
     width: '100vw',
-    height: '80vh'
+    height: '80vh',
   },
-  card: {
+  'card': {
     marginBottom: theme.spacing(2),
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
-  media: {
+  'media': {
     width: '100%',
-    height: 'auto'
-  }
+    height: 'auto',
+  },
+  'animationTop': {
+    position: 'relative',
+    animationName: '$fadeInUp',
+    animationDuration: '2s',
+  },
+  'animationBottom': {
+    position: 'relative',
+    animationName: '$fadeInBottom',
+    animationDuration: '2s',
+  },
+  '@keyframes fadeInUp': {
+    from: { opacity: 0, bottom: '30vh' },
+    to: { opacity: 1, bottom: '0vh' },
+  },
+  '@keyframes fadeInBottom': {
+    from: { opacity: 0, top: '30vh' },
+    to: { opacity: 1, top: '0vh' },
+  },
 }));
 
 const IntroSelection = () => {
@@ -47,7 +65,7 @@ const IntroSelection = () => {
       className={classes.root}
     >
       <Grid item xs={10} sm={3}>
-        <Card className={classes.card}>
+        <Card className={`${classes.card} ${classes.animationTop}`}>
           <CardActionArea className={classes.card}>
             <CardMedia className={classes.media}>
               <img src={viewImage} className={classes.media} alt='view' />
@@ -72,7 +90,7 @@ const IntroSelection = () => {
         </Card>
       </Grid>
       <Grid item xs={10} sm={3}>
-        <Card className={classes.card}>
+        <Card className={`${classes.card} ${classes.animationBottom}`}>
           <CardActionArea className={classes.card}>
             <CardMedia className={classes.media}>
               <img src={eventImage} className={classes.media} alt='event' />
@@ -97,7 +115,7 @@ const IntroSelection = () => {
         </Card>
       </Grid>
       <Grid item xs={10} sm={3}>
-        <Card className={classes.card}>
+        <Card className={`${classes.card} ${classes.animationTop}`}>
           <CardActionArea className={classes.card}>
             <CardMedia className={classes.media}>
               <img src={foodImage} className={classes.media} alt='food' />
