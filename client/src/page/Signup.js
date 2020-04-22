@@ -57,6 +57,7 @@ const Signup = () => {
   const classes = useStyles();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [studentNumber, setStudentNumber] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [nationality, setNationality] = useState('');
@@ -68,6 +69,7 @@ const Signup = () => {
     const user = {
       firstName,
       lastName,
+      studentNumber,
       email,
       phone,
       nationality,
@@ -105,7 +107,6 @@ const Signup = () => {
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-
           <TextField
             label='Last Name'
             variant='outlined'
@@ -116,7 +117,16 @@ const Signup = () => {
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-
+          <TextField
+            label='Stundent Number'
+            variant='outlined'
+            color='secondary'
+            className={classes.textInput}
+            value={studentNumber}
+            autoComplete='no'
+            onChange={(e) => setStudentNumber(e.target.value)}
+            required
+          />
           <TextField
             label='Phone'
             variant='outlined'
