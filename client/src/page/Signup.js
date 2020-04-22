@@ -5,6 +5,7 @@ import {
   Button,
   MenuItem,
   TextField,
+  Modal,
 } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
@@ -30,6 +31,30 @@ const useStyles = makeStyles((theme) => ({
   formItem: {
     margin: theme.spacing(2),
     width: '80%',
+  },
+  modal: {
+    width: '20vw',
+    minWidth: '400px',
+    padding: theme.spacing(2),
+    backgroundColor: theme.palette.primary.main,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    marginBottom: '5rem',
+  },
+  modalRoot: {
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalItem: {
+    textAlign: 'center',
+  },
+  modalBottom: {
+    marginTop: theme.spacing(),
   },
   textInput: {
     '& .MuiOutlinedInput-root': {
@@ -66,6 +91,7 @@ const Signup = () => {
   const [nationality, setNationality] = useState('');
   const [studentType, setStudentType] = useState('');
   const [japanese, setJapanese] = useState('');
+  const [open, setOpen] = useState('');
 
   // context
   const alertContext = useContext(AlertContext);
@@ -102,7 +128,7 @@ const Signup = () => {
       })
       .then((data) => {
         if (status >= 200 && status <= 300) {
-          console.log(data);
+          setOpen(true);
         } else {
           if (Array.isArray(data.errors)) {
             for (let error of data.errors) {
@@ -123,6 +149,20 @@ const Signup = () => {
         });
       });
   };
+
+  const handleClose = () => {
+    setOpen(false);
+    setFirstName('');
+    setLastName('');
+    setStudentNumber('');
+    setEmail('');
+    setPhone('');
+    setNationality('');
+    setStudentType('');
+    setJapanese('');
+    clearAlert();
+  };
+
   return (
     <div className={classes.root}>
       <div>
@@ -264,6 +304,47 @@ const Signup = () => {
             </Typography>
           </Button>
         </Paper>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='simple-modal-title'
+          aria-describedby='simple-modal-description'
+          className={classes.modalRoot}
+        >
+          <Paper className={classes.modal} elevation={5}>
+            <Typography
+              color='secondary'
+              className={classes.modalItem}
+            >{`Dear ${lastName},`}</Typography>
+            <Typography color='secondary' className={classes.modalItem}>
+              <FormattedMessage
+                id='signup.success'
+                defaultMessage='You have succesfully registered to UQJX '
+              />
+            </Typography>
+
+            <Typography color='secondary' className={classes.modalItem}>
+              <FormattedMessage id='signup.success2' defaultMessage='' />
+            </Typography>
+            <Button
+              className={classes.modalBottom}
+              color='primary'
+              variant='contained'
+              onClick={() => {
+                setOpen(false);
+                handleClose();
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth',
+                });
+              }}
+            >
+              <Typography color='secondary'>
+                <FormattedMessage id='signup.close' defaultMessage='close' />
+              </Typography>
+            </Button>
+          </Paper>
+        </Modal>
       </div>
     </div>
   );
