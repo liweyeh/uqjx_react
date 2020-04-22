@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Paper,
   Typography,
@@ -8,6 +8,8 @@ import {
 } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
+import AlertContext from '../context/alert/alertContext';
+import Alert from '../components/layout/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Signup = () => {
+  // state
   const classes = useStyles();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -63,6 +66,10 @@ const Signup = () => {
   const [nationality, setNationality] = useState('');
   const [studentType, setStudentType] = useState('');
   const [japanese, setJapanese] = useState('');
+
+  // context
+  const alertContext = useContext(AlertContext);
+  const { setAlert, clearAlert } = alertContext;
 
   //Todo: add debounce if have time
   const onSubmit = () => {
@@ -76,7 +83,45 @@ const Signup = () => {
       studentType,
       japanese,
     };
-    console.log(user);
+    registerMember(user);
+  };
+
+  const registerMember = (formData) => {
+    let status = null;
+    let errorArr = [];
+    fetch('/api/members', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => {
+        status = res.status;
+        return res.json();
+      })
+      .then((data) => {
+        if (status >= 200 && status <= 300) {
+          console.log(data);
+        } else {
+          if (Array.isArray(data.errors)) {
+            for (let error of data.errors) {
+              errorArr.push(error.msg);
+            }
+            throw new Error();
+          } else {
+            errorArr.push(data.msg);
+            throw new Error();
+          }
+        }
+      })
+      .catch((error) => {
+        setAlert(errorArr.length > 0 ? errorArr : error, 'danger');
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      });
   };
   return (
     <div className={classes.root}>
@@ -96,6 +141,7 @@ const Signup = () => {
           >
             <FormattedMessage id='signup.instruction' defaultMessage='Signup' />
           </Typography>
+          <Alert />
           <TextField
             label='First Name'
             variant='outlined'
