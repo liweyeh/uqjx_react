@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   'content': {
     height: '90vh',
-    width: '99vw',
+    width: '100vw',
   },
   'welcomeMenu': {
     position: 'relative',
